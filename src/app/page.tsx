@@ -1,9 +1,15 @@
-import { Typography } from "@mui/material";
+"use client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <Typography component="h1" sx={{ fontSize: "2rem" }}>
-      Hello World
-    </Typography>
-  );
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("token")) {
+      router.replace("/login");
+    } else {
+      router.replace("/products");
+    }
+  }, [router]);
 }
