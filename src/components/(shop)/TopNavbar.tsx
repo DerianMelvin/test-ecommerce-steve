@@ -1,13 +1,21 @@
 "use client";
 import { Box, Typography } from "@mui/material";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import LogoutButton from "./LogoutButton";
+import { useEffect } from "react";
 
 export default function TopNavbar() {
+  const router = useRouter();
   const pathname = usePathname();
   const capitalizedPathname =
     pathname.replace("/", "").charAt(0).toUpperCase() +
     pathname.replace("/", "").slice(1);
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("token")) {
+      router.replace("/login");
+    }
+  });
 
   return (
     <Box
