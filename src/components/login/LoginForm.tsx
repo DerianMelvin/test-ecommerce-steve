@@ -3,6 +3,9 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ObjectSchema, object, string } from "yup";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 type LoginInput = {
   username: string;
@@ -18,17 +21,49 @@ const schema: ObjectSchema<LoginInput> = object({
 });
 
 export default function LoginForm() {
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const router = useRouter();
+
   // React Hook Form setup
   const {
     register,
     handleSubmit,
+    setError,
+    clearErrors,
     formState: { errors },
   } = useForm<LoginInput>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: LoginInput) => {
-    console.log(data);
+  const onSubmit = async (data: LoginInput) => {
+    try {
+      setButtonDisabled(true);
+
+      // remove errors if exist
+      clearErrors("root.clientError");
+
+      const response = await axios.post(
+        "https://fakestoreapi.com/auth/login",
+        data
+      );
+
+      // store token to session storage
+      sessionStorage.setItem("token", response.data.token);
+
+      // navigate user to products page
+      router.replace("/products");
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setError("root.clientError", {
+          message: error.response?.data,
+        });
+      } else {
+        console.log(error);
+      }
+
+      setButtonDisabled(false);
+    }
   };
 
   return (
@@ -38,6 +73,7 @@ export default function LoginForm() {
       sx={{
         width: "100%",
         p: "2rem",
+        pb: "1rem",
         display: "flex",
         flexDirection: "column",
         gap: "0.5rem",
@@ -93,9 +129,26 @@ export default function LoginForm() {
       </Box>
 
       {/* Login Button */}
-      <Button variant="contained" type="submit" fullWidth size="large">
+      <Button
+        variant="contained"
+        type="submit"
+        fullWidth
+        size="large"
+        disabled={buttonDisabled}
+      >
         Login
       </Button>
+
+      {/* Error Message */}
+      <Typography
+        component="span"
+        height="24px"
+        color="red"
+        fontSize="0.9rem"
+        textAlign="center"
+      >
+        {errors.root?.clientError?.message}
+      </Typography>
     </Box>
   );
 }
