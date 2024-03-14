@@ -1,4 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import Sidebar from "@/components/(shop)/Sidebar";
+import TopNavbar from "@/components/(shop)/TopNavbar";
+import { Box } from "@mui/material";
 
 export default function ShopLayout({
   children,
@@ -13,17 +15,7 @@ export default function ShopLayout({
         display: "flex",
       }}
     >
-      {/* Sidebar */}
-      <Box
-        component="nav"
-        sx={{
-          width: "300px",
-          height: "100%",
-          bgcolor: "gray",
-        }}
-      >
-        <Typography component="p">Logo</Typography>
-      </Box>
+      <Sidebar />
 
       <Box
         component="div"
@@ -33,17 +25,8 @@ export default function ShopLayout({
           flexDirection: "column",
         }}
       >
-        {/* Top Navbar */}
-        <Box
-          component="div"
-          sx={{
-            width: "100%",
-            height: "100px",
-            bgcolor: "darkblue",
-          }}
-        >
-          <Typography>Products</Typography>
-        </Box>
+        <TopNavbar />
+
         {children}
       </Box>
     </Box>
