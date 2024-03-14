@@ -1,6 +1,7 @@
 "use client";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { usePathname } from "next/navigation";
+import LogoutButton from "./LogoutButton";
 
 export default function TopNavbar() {
   const pathname = usePathname();
@@ -32,15 +33,7 @@ export default function TopNavbar() {
         }}
       >
         <Typography variant="h5">{capitalizedPathname}</Typography>
-        <Button
-          variant="contained"
-          color="error"
-          sx={{
-            borderRadius: "55rem",
-          }}
-        >
-          Logout
-        </Button>
+        <LogoutButton />
       </Box>
     </Box>
   );
