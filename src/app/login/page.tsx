@@ -1,4 +1,5 @@
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
+import LoginForm from "@/components/login/LoginForm";
 
 export default function Login() {
   return (
@@ -27,7 +28,7 @@ export default function Login() {
           }}
         >
           <Typography
-            variant="h3"
+            variant="h4"
             component="h1"
             sx={{
               width: "100%",
@@ -39,40 +40,7 @@ export default function Login() {
           >
             Login
           </Typography>
-          <Box
-            component="form"
-            sx={{
-              width: "100%",
-              p: "2rem",
-              display: "flex",
-              flexDirection: "column",
-              gap: "1rem",
-            }}
-          >
-            <TextField
-              id="username"
-              label="Username"
-              name="username"
-              required
-              fullWidth
-            />
-            <TextField
-              id="password"
-              label="Password"
-              name="password"
-              type="password"
-              required
-              fullWidth
-            />
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              size="large"
-            >
-              Login
-            </Button>
-          </Box>
+          <LoginForm />
         </Box>
       </Box>
     </Container>
