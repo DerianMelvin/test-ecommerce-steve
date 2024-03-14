@@ -3,6 +3,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 import theme from "@/mui/theme";
+import AuthNotificationContext from "@/components/layout/AuthNotificationContext";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,7 +21,7 @@ export default function RootLayout({
         <AppRouterCacheProvider options={{ key: "css" }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            {children}
+            <AuthNotificationContext>{children}</AuthNotificationContext>
           </ThemeProvider>
         </AppRouterCacheProvider>
       </body>

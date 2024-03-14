@@ -5,7 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { ObjectSchema, object, string } from "yup";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import {
+  NotificationContextType,
+  authNotificationContext,
+} from "@/components/layout/AuthNotificationContext";
 
 type LoginInput = {
   username: string;
@@ -21,6 +25,12 @@ const schema: ObjectSchema<LoginInput> = object({
 });
 
 export default function LoginForm() {
+  // for displaying successful auth notification
+  const { open, setOpen } = useContext(
+    authNotificationContext
+  ) as NotificationContextType;
+
+  // disable / enable button when submiting
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const router = useRouter();
@@ -53,6 +63,9 @@ export default function LoginForm() {
 
       // navigate user to products page
       router.replace("/products");
+
+      // display successful login notification
+      setOpen((prev) => ({ ...prev, loginNotification: true }));
     } catch (error) {
       if (error instanceof AxiosError) {
         setError("root.clientError", {
