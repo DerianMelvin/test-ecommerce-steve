@@ -69,6 +69,12 @@ export default function Products() {
     }
   };
 
+  const filterDeletedProducts = (id: number) => {
+    const filtered =
+      products && products.filter((product) => product.id !== id);
+    setProducts(filtered);
+  };
+
   // fetch data based on currently selected category
   useEffect(() => {
     if (category == "all") {
@@ -90,6 +96,7 @@ export default function Products() {
         overflow: "auto",
       }}
     >
+      {/* Display Categories */}
       <ButtonGroup variant="outlined" fullWidth>
         {categoryList.map((ctg) => (
           <Button key={ctg} onClick={() => setCategory(ctg)}>
@@ -98,6 +105,7 @@ export default function Products() {
         ))}
       </ButtonGroup>
 
+      {/* Product List */}
       <Box
         component="div"
         sx={{
@@ -119,9 +127,16 @@ export default function Products() {
           products &&
           products
             .slice((page - 1) * 6, page * 6)
-            .map((product) => <Product key={product.id} product={product} />)}
+            .map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                filterDeletedProducts={filterDeletedProducts}
+              />
+            ))}
       </Box>
 
+      {/* Pagination */}
       {!loading && products && (
         <Pagination
           count={Math.ceil(products.length / 6)}

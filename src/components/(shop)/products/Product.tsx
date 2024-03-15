@@ -1,8 +1,54 @@
 import { ProductsType } from "@/app/(shop)/products/page";
+import {
+  ShopNotificationContextType,
+  shopNotificationContext,
+} from "@/components/layout/ShopNotificationContext";
 import { Box, Typography, Button } from "@mui/material";
+import axios, { AxiosError } from "axios";
 import { Image } from "mui-image";
+import { useContext, useState } from "react";
 
-export default function Product({ product }: { product: ProductsType }) {
+type ProductType = {
+  product: ProductsType;
+  filterDeletedProducts: (id: number) => void;
+};
+
+export default function Product({
+  product,
+  filterDeletedProducts,
+}: ProductType) {
+  const { open, setOpen } = useContext(
+    shopNotificationContext
+  ) as ShopNotificationContextType;
+
+  // disable / enable button when deleting or add to cart
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
+  const deleteProduct = async () => {
+    try {
+      setButtonDisabled(true);
+
+      const response = await axios.delete(
+        `https://fakestoreapi.com/products/${product.id}`
+      );
+
+      filterDeletedProducts(product.id);
+
+      // display product deleted notification
+      setOpen((prev) => ({ ...prev, productDeletedNotification: true }));
+
+      setButtonDisabled(false);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        throw new AxiosError("Failed to delete product");
+      } else {
+        console.log(error);
+      }
+
+      setButtonDisabled(false);
+    }
+  };
+
   return (
     <Box
       key={product.id}
@@ -79,8 +125,15 @@ export default function Product({ product }: { product: ProductsType }) {
           gap: "0.5rem",
         }}
       >
-        <Button variant="contained">Add to Cart</Button>
-        <Button variant="contained" color="error">
+        <Button variant="contained" disabled={buttonDisabled}>
+          Add to Cart
+        </Button>
+        <Button
+          variant="contained"
+          disabled={buttonDisabled}
+          onClick={() => deleteProduct()}
+          color="error"
+        >
           Delete
         </Button>
       </Box>
