@@ -1,7 +1,7 @@
 import { CartType } from "@/app/(shop)/cart/page";
 import { Box, Typography, Button } from "@mui/material";
 import { useState } from "react";
-import ProductsDialog from "./ProductsDialog";
+import CartProductsDialog from "./CartProductsDialog";
 
 type CartTableRowType = {
   cart: CartType;
@@ -36,7 +36,7 @@ export default function CartTableRow({ cart }: CartTableRowType) {
           View Cart
         </Button>
 
-        <ProductsDialog open={open} setOpen={setOpen} cart={cart} />
+        <CartProductsDialog open={open} setOpen={setOpen} cart={cart} />
       </Box>
     </Box>
   );

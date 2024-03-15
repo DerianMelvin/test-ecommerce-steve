@@ -16,7 +16,7 @@ type ProductsDialogType = {
   cart: CartType;
 };
 
-export default function ProductsDialog({
+export default function CartProductsDialog({
   open,
   setOpen,
   cart,
