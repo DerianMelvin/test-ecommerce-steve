@@ -1,14 +1,9 @@
 "use client";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Pagination,
-  Typography,
-} from "@mui/material";
+import { Box, Button, ButtonGroup, Pagination } from "@mui/material";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import Product from "@/components/(shop)/products/Product";
+import Loading from "@/components/(shop)/Loading";
 
 export type ProductsType = {
   id: number;
@@ -117,11 +112,7 @@ export default function Products() {
           overflow: "auto",
         }}
       >
-        {loading && (
-          <Box>
-            <Typography>Loading...</Typography>
-          </Box>
-        )}
+        {loading && <Loading />}
 
         {!loading &&
           products &&
