@@ -23,7 +23,8 @@ export default function TopNavbar() {
       sx={{
         width: "100%",
         height: "100px",
-        p: "1.5rem",
+        p: "1rem",
+        px: "1.5rem",
       }}
     >
       <Box
@@ -36,7 +37,7 @@ export default function TopNavbar() {
           width: "100%",
           p: "1rem",
           px: "1.5rem",
-          borderRadius: "55rem",
+          borderRadius: "0.5rem",
           bgcolor: "lightskyblue",
         }}
       >

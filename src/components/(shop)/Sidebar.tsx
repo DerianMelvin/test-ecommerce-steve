@@ -9,9 +9,9 @@ export default function Sidebar() {
         width: "300px",
         minWidth: "fit-content",
         height: "100%",
-        borderTopRightRadius: "3rem",
-        borderBottomRightRadius: "3rem",
-        bgcolor: "lightskyblue",
+        borderTopRightRadius: "1.5rem",
+        borderBottomRightRadius: "1.5rem",
+        bgcolor: "midnightblue",
       }}
     >
       <Typography
@@ -21,7 +21,8 @@ export default function Sidebar() {
           width: "100%",
           p: "1rem",
           px: "1.5rem",
-          borderBottom: "1px solid black",
+          borderBottom: "1px solid white",
+          color: "white",
         }}
       >
         Logo
@@ -43,11 +44,13 @@ export default function Sidebar() {
           sx={{
             width: "100%",
             p: "1rem",
-            px: "2rem",
-            borderRadius: "55rem",
+            borderRadius: "0.5rem",
+            border: "1px solid transparent",
             textDecoration: "none",
             color: "white",
-            bgcolor: "midnightblue",
+            ":hover": {
+              borderColor: "skyblue",
+            },
           }}
         >
           Products
@@ -70,11 +73,13 @@ export default function Sidebar() {
           sx={{
             width: "100%",
             p: "1rem",
-            px: "2rem",
-            borderRadius: "55rem",
+            borderRadius: "0.5rem",
+            border: "1px solid transparent",
             textDecoration: "none",
             color: "white",
-            bgcolor: "midnightblue",
+            ":hover": {
+              borderColor: "skyblue",
+            },
           }}
         >
           Cart

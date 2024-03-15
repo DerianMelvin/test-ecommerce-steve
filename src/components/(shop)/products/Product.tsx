@@ -60,7 +60,7 @@ export default function Product({
         gap: "1rem",
         p: "0.8rem",
         border: "1px solid black",
-        borderRadius: "1rem",
+        borderRadius: "0.5rem",
       }}
     >
       <Box
@@ -125,9 +125,6 @@ export default function Product({
           gap: "0.5rem",
         }}
       >
-        <Button variant="contained" disabled={buttonDisabled}>
-          Add to Cart
-        </Button>
         <Button
           variant="contained"
           disabled={buttonDisabled}

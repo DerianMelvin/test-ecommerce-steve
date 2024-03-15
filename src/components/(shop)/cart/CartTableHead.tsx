@@ -13,7 +13,7 @@ export default function CartTableHead() {
         borderTopLeftRadius: "0.5rem",
         borderTopRightRadius: "0.5rem",
         textAlign: "center",
-        bgcolor: "lightgrey",
+        bgcolor: "lightskyblue",
       }}
     >
       <Typography width="5ch">ID</Typography>
