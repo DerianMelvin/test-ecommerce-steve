@@ -1,11 +1,15 @@
 import { CartType } from "@/app/(shop)/cart/page";
 import { Box, Typography, Button } from "@mui/material";
+import { useState } from "react";
+import ProductsDialog from "./ProductsDialog";
 
 type CartTableRowType = {
   cart: CartType;
 };
 
 export default function CartTableRow({ cart }: CartTableRowType) {
+  const [open, setOpen] = useState<boolean>(false);
+
   return (
     <Box
       key={cart.id}
@@ -24,9 +28,15 @@ export default function CartTableRow({ cart }: CartTableRowType) {
       <Typography width="20%">{cart.date.toString()}</Typography>
       <Typography width="10ch">{cart.products.length}</Typography>
       <Box width="30%">
-        <Button variant="contained" color="secondary">
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => setOpen(true)}
+        >
           View Cart
         </Button>
+
+        <ProductsDialog open={open} setOpen={setOpen} cart={cart} />
       </Box>
     </Box>
   );
