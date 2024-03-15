@@ -1,5 +1,6 @@
 import Sidebar from "@/components/(shop)/Sidebar";
 import TopNavbar from "@/components/(shop)/TopNavbar";
+import ShopNotificationContext from "@/components/layout/ShopNotificationContext";
 import { Box } from "@mui/material";
 
 export default function ShopLayout({
@@ -26,8 +27,7 @@ export default function ShopLayout({
         }}
       >
         <TopNavbar />
-
-        {children}
+        <ShopNotificationContext>{children}</ShopNotificationContext>
       </Box>
     </Box>
   );
