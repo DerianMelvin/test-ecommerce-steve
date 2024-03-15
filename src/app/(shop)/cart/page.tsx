@@ -2,7 +2,8 @@
 import Loading from "@/components/(shop)/Loading";
 import CartTableHead from "@/components/(shop)/cart/CartTableHead";
 import CartTableRow from "@/components/(shop)/cart/CartTableRow";
-import { Box, Button, Pagination, Typography } from "@mui/material";
+import NewCartButton from "@/components/(shop)/cart/NewCartButton";
+import { Box, Pagination } from "@mui/material";
 import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 
@@ -55,10 +56,7 @@ export default function Cart() {
         overflow: "auto",
       }}
     >
-      {/* Menu */}
-      <Box>
-        <Button variant="contained">New Cart</Button>
-      </Box>
+      <NewCartButton />
 
       {/* Cart Table */}
       <Box
