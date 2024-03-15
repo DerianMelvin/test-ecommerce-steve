@@ -39,8 +39,8 @@ export default function NewCartButton() {
       </Button>
 
       <AddProductsDialog
-        open={open}
-        setOpen={setOpen}
+        openDialog={open}
+        setOpenDialog={setOpen}
         products={products}
         loading={loading}
       />

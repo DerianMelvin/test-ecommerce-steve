@@ -6,25 +6,40 @@ import {
   DialogActions,
   Button,
 } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useContext } from "react";
 import ListItemProduct from "./ListItemProduct";
 import Loading from "../Loading";
+import {
+  shopNotificationContext,
+  ShopNotificationContextType,
+} from "@/components/layout/ShopNotificationContext";
 
 type AddProductsDialogType = {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  openDialog: boolean;
+  setOpenDialog: Dispatch<SetStateAction<boolean>>;
   products: ProductsType[] | null;
   loading: boolean;
 };
 
 export default function AddProductsDialog({
-  open,
-  setOpen,
+  openDialog,
+  setOpenDialog,
   products,
   loading,
 }: AddProductsDialogType) {
+  const { open, setOpen } = useContext(
+    shopNotificationContext
+  ) as ShopNotificationContextType;
+
+  const saveToCart = () => {
+    setOpenDialog(false);
+
+    // display product added to cart notification
+    setOpen((prev) => ({ ...prev, cartAddedNotification: true }));
+  };
+
   return (
-    <Dialog open={open} onClose={() => setOpen(false)}>
+    <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
       <DialogTitle id="alert-dialog-title">Create New Cart</DialogTitle>
 
       <List
@@ -41,7 +56,7 @@ export default function AddProductsDialog({
       </List>
 
       <DialogActions>
-        <Button onClick={() => setOpen(false)}>Save Cart</Button>
+        <Button onClick={() => saveToCart()}>Save Cart</Button>
       </DialogActions>
     </Dialog>
   );
