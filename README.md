@@ -4,7 +4,13 @@ This is a test project for a simple e-commerce project using the [Fake Store API
 
 ## Getting Started
 
-Clone the repository and run the development server:
+Clone the repository, then open the directory and install all dependencies:
+
+```bash
+npm i
+```
+
+Then run the development server:
 
 ```bash
 npm run dev
